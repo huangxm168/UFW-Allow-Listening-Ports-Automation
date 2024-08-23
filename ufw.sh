@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# 清除屏幕内容
-clear
+# 脚本独立运行时清除屏幕内容
+if [ -z "$PARENT_SCRIPT" ]; then
+    clear
+fi
 
 # 颜色定义
 GREEN="\e[32m"
