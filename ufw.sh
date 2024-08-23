@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 清除屏幕内容
+clear
+
 # 颜色定义
 GREEN="\e[32m"
 RED="\e[31m"
