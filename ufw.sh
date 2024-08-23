@@ -42,7 +42,7 @@ fi
 # 系统更新
 echo ""
 echo -e "${YELLOW}正在更新系统并安装环境依赖……${RESET}"
-apt update > /dev/null && apt upgrade -y > /dev/null
+apt-get update > /dev/null && apt-get upgrade -y > /dev/null
 if [ $? -ne 0 ]; then
     echo -e "${RED}系统和软件更新失败，请检查相关错误，或手动更新后再次运行脚本。${RESET}"
     echo ""
@@ -76,7 +76,7 @@ else
     if $iptables_installed || $nftables_installed; then
         echo ""
         echo -e "${YELLOW}当前系统的防火墙配置和状态符合要求，正在安装 ufw...${RESET}"
-        apt install ufw -y > /dev/null 2>&1
+        apt-get install ufw -y > /dev/null 2>&1
         if [ $? -ne 0 ]; then
             echo -e "${RED}ufw 安装失败，脚本已退出。${RESET}"
             exit 1
