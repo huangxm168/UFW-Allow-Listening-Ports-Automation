@@ -174,7 +174,7 @@ fi
 if ufw status | grep -q "Status: inactive"; then
     echo ""
     echo -e "${YELLOW}正在启用 ufw 防火墙...${RESET}"
-    ufw enable > /dev/null 2>&1
+    yes | ufw enable > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}ufw 防火墙已启用！${RESET}"
     else
