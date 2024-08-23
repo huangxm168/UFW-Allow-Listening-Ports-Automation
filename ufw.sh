@@ -70,7 +70,7 @@ $firewalld_installed && echo -e "${BLUE}检测到 firewalld 已安装。${RESET}
 # 根据检测结果进行逻辑判断
 if $ufw_installed && ! $firewalld_installed; then
     echo ""
-    echo -e "${YELLOW}检测到 ufw 已安装且未安装 firewalld。${RESET}"
+    echo -e "${YELLOW}检测到 ufw 已安装且 firewalld 未安装。${RESET}"
     echo -e "${BLUE}已跳过 ufw 安装步骤。${RESET}"
 else
     if $iptables_installed || $nftables_installed; then
@@ -78,7 +78,21 @@ else
         echo -e "${YELLOW}当前系统的防火墙配置和状态符合要求，正在安装 ufw...${RESET}"
         apt-get install ufw -y > /dev/null 2>&1
         if [ $? -ne 0 ]; then
-            echo -e "${RED}ufw 安装失败，脚本已退出。${RESET}"
+            echo -e "${RED}ufw 安装失败！${RESET}"
+            echo ""
+            echo -e "${MAGENTA}脚本已自动退出。${RESET}"
+            exit 1
+        else
+            echo -e "${GREEN}ufw 安装成功！${RESET}"
+        fi
+    elif ! $ufw_installed && ! $iptables_installed && ! $nftables_installed && ! $firewalld_installed; then
+        echo ""
+        echo -e "${YELLOW}未检测到任何防火墙工具，正在安装 ufw...${RESET}"
+        apt-get install ufw -y > /dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            echo -e "${RED}ufw 安装失败！${RESET}"
+            echo ""
+            echo -e "${MAGENTA}脚本已自动退出。${RESET}"
             exit 1
         else
             echo -e "${GREEN}ufw 安装成功！${RESET}"
