@@ -2,7 +2,7 @@
 
 **一键命令**
 
-    wget --no-check-certificate -O ufw.sh https://raw.githubusercontent.com/huangxm168/UFW-Allow-Listening-Ports-Automation/main/ufw.sh && chmod +x ufw.sh && sudo ./ufw.sh
+    bash <(curl -Ls UFW.hxm.sh)
 
 **脚本功能概述：**
 
